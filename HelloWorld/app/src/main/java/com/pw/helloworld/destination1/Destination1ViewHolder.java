@@ -6,23 +6,20 @@ import android.widget.TextView;
 
 import com.pw.helloworld.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class Destination1ViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView title;
-    private final TextView message;
+    @BindView(R.id.destination_1_item_title)
+    TextView title;
+
+    @BindView(R.id.destination_1_item_message)
+    TextView message;
 
     public Destination1ViewHolder(View itemView) {
         super(itemView);
 
-        title = itemView.findViewById(R.id.destination_1_item_title);
-        message = itemView.findViewById(R.id.destination_1_item_message);
-    }
-
-    public TextView getTitle() {
-        return title;
-    }
-
-    public TextView getMessage() {
-        return message;
+        ButterKnife.bind(this, itemView);
     }
 }

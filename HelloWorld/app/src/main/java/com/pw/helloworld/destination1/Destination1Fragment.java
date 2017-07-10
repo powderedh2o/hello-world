@@ -12,10 +12,20 @@ import android.view.ViewGroup;
 
 import com.pw.helloworld.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class Destination1Fragment extends Fragment {
 
+    @BindView(R.id.destination_1_swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
+
+    @BindView(R.id.destination_1_recycler_view)
+    RecyclerView recyclerView;
+
     private Destination1Adapter adapter;
-    private SwipeRefreshLayout swipeRefresh;
+    private Unbinder unbinder;
 
     private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
@@ -34,23 +44,28 @@ public class Destination1Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_destination1, container, false);
+        View view = inflater.inflate(R.layout.fragment_destination1, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        swipeRefresh = view.findViewById(R.id.destination_1_swipe_refresh);
         swipeRefresh.setOnRefreshListener(onRefreshListener);
 
-        final RecyclerView recyclerView = view.findViewById(R.id.destination_1_recycler_view);
-        recyclerView.setHasFixedSize(true);
-
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-
         adapter = new Destination1Adapter();
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

@@ -28,8 +28,8 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
     @Override
     public void onBindViewHolder(Destination1ViewHolder holder, int position) {
         final Destination1Item item = items.get(position);
-        holder.getTitle().setText(item.getTitle());
-        holder.getMessage().setText(item.getMessage());
+        holder.title.setText(item.getTitle());
+        holder.message.setText(item.getMessage());
     }
 
     @Override
