@@ -16,9 +16,7 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
     public Destination1Adapter() {
         items = new ArrayList<>();
-        items.add(new Destination1Item("Title 1", String.valueOf(Math.random())));
-        items.add(new Destination1Item("Title 2", String.valueOf(Math.random())));
-        items.add(new Destination1Item("Title 3", String.valueOf(Math.random())));
+        initItems();
     }
 
     @Override
@@ -37,5 +35,17 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void refresh() {
+        initItems();
+        notifyDataSetChanged();
+    }
+
+    private void initItems() {
+        items.clear();
+        items.add(new Destination1Item("Title 1", String.valueOf(Math.random())));
+        items.add(new Destination1Item("Title 2", String.valueOf(Math.random())));
+        items.add(new Destination1Item("Title 3", String.valueOf(Math.random())));
     }
 }

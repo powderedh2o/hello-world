@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_destination_1 -> {
                 supportFragmentManager.beginTransaction().replace(R.id.destination_container, Destination1Fragment.newInstance()).commit()
@@ -32,10 +32,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottom_navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val selectedItemID = bottom_navigation.selectedItemId
         val selectedItem = bottom_navigation.menu.findItem(selectedItemID)
-        mOnNavigationItemSelectedListener.onNavigationItemSelected(selectedItem)
+        onNavigationItemSelectedListener.onNavigationItemSelected(selectedItem)
     }
 }
