@@ -10,15 +10,15 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_destination_1 -> {
-                destination_title.setText(R.string.navigation_destination_1_title)
+                supportFragmentManager.beginTransaction().replace(R.id.destination_container, Destination1Fragment.newInstance()).commit();
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_destination_2 -> {
-                destination_title.setText(R.string.navigation_destination_2_title)
+                supportFragmentManager.beginTransaction().replace(R.id.destination_container, Destination2Fragment.newInstance()).commit();
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_destination_3 -> {
-                destination_title.setText(R.string.navigation_destination_3_title)
+                supportFragmentManager.beginTransaction().replace(R.id.destination_container, Destination3Fragment.newInstance()).commit();
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -30,5 +30,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        val selectedItemID = bottom_navigation.getSelectedItemId()
+        val selectedItem = bottom_navigation.menu.findItem(selectedItemID)
+        mOnNavigationItemSelectedListener.onNavigationItemSelected(selectedItem)
     }
 }
