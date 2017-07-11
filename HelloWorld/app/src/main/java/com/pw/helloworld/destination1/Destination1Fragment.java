@@ -15,6 +15,7 @@ import com.pw.helloworld.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 public class Destination1Fragment extends Fragment {
 
@@ -30,6 +31,7 @@ public class Destination1Fragment extends Fragment {
     private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            Timber.d("Refreshing Destination 1");
             adapter.refresh();
             swipeRefresh.setRefreshing(false);
         }
