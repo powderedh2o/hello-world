@@ -255,7 +255,7 @@ fun main(args: Array<String>) {
     // =======
 
     // Properties and methods
-    val classInstace = ExampleClass(1, 2, 3);
+    val classInstace = ExampleClass(1, 2, 3)
     println(classInstace.y)
     println(classInstace.myGetter)
     println(classInstace.myMethod())
@@ -263,7 +263,7 @@ fun main(args: Array<String>) {
     classInstace.mySettable = "Tom"
 
     // toString, equals, hashCode and copy
-    val instance1 = ExampleClassWithToStringEqualsHashCodeAndCopy(1);
+    val instance1 = ExampleClassWithToStringEqualsHashCodeAndCopy(1)
     val instance2 = instance1.copy()
     val instancesEquals = instance1 == instance2 // Uses == not equals as we have 'data'
 

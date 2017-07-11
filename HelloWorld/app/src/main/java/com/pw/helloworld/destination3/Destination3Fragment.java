@@ -10,9 +10,6 @@ import com.pw.helloworld.R;
 
 public class Destination3Fragment extends Fragment {
 
-    public Destination3Fragment() {
-    }
-
     public static Destination3Fragment newInstance() {
         return new Destination3Fragment();
     }

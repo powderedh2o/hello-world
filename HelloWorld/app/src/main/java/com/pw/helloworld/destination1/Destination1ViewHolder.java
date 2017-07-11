@@ -11,11 +11,11 @@ import butterknife.ButterKnife;
 
 public class Destination1ViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.destination_1_item_title)
-    TextView title;
+    @BindView(R.id.destination_1_item_username)
+    TextView username;
 
-    @BindView(R.id.destination_1_item_message)
-    TextView message;
+    @BindView(R.id.destination_1_item_name)
+    TextView name;
 
     public Destination1ViewHolder(View itemView) {
         super(itemView);

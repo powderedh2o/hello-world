@@ -6,17 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pw.helloworld.R;
+import com.pw.helloworld.users.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
-    private final List<Destination1Item> items;
+    private final List<User> users;
 
     public Destination1Adapter() {
-        items = new ArrayList<>();
-        initItems();
+        users = new ArrayList<>();
     }
 
     @Override
@@ -27,25 +27,19 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
     @Override
     public void onBindViewHolder(Destination1ViewHolder holder, int position) {
-        final Destination1Item item = items.get(position);
-        holder.title.setText(item.getTitle());
-        holder.message.setText(item.getMessage());
+        final User user = users.get(position);
+        holder.username.setText(user.getUsername());
+        holder.name.setText(user.getName());
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return users.size();
     }
 
-    public void refresh() {
-        initItems();
+    public void setUsers(List<User> users) {
+        this.users.clear();
+        this.users.addAll(users);
         notifyDataSetChanged();
-    }
-
-    private void initItems() {
-        items.clear();
-        items.add(new Destination1Item("Title 1", String.valueOf(Math.random())));
-        items.add(new Destination1Item("Title 2", String.valueOf(Math.random())));
-        items.add(new Destination1Item("Title 3", String.valueOf(Math.random())));
     }
 }
