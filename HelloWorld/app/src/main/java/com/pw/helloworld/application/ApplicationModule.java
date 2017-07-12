@@ -6,6 +6,7 @@ import com.pw.helloworld.users.UserApiClient;
 import com.pw.helloworld.users.UserApiClientImpl;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,6 +28,7 @@ public abstract class ApplicationModule {
     }
 
     @Provides
+    @Singleton
     static OkHttpClient provideOkHttpClient() {
         final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -34,6 +36,7 @@ public abstract class ApplicationModule {
     }
 
     @Provides
+    @Singleton
     static Retrofit provideRetrofit(OkHttpClient httpClient, @Named("baseUrl") String baseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -48,6 +51,7 @@ public abstract class ApplicationModule {
     }
 
     @Provides
+    @Singleton
     static UserApiClient provideUserApiClient(UserApi userApi) {
         return new UserApiClientImpl(userApi);
     }
