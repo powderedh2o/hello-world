@@ -29,6 +29,13 @@ public class YourActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        message.setText(messageGenerator.generateMessage());
+        message.setText(messageGenerator.generateMessage(MessageGenerator.Source.ACTIVITY));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, YourFragment.newInstance()).commit();
     }
 }
