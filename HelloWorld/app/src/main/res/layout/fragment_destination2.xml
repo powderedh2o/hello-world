@@ -7,8 +7,14 @@
     tools:context="com.pw.helloworld.destination1.Destination1Fragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/navigation_destination_2_title"/>
+
+    <Button
+        android:id="@+id/start_your_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_your_activity"/>
 
 </LinearLayout>
