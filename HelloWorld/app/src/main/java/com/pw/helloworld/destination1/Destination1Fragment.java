@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.pw.helloworld.R;
 import com.pw.helloworld.users.User;
 import com.pw.helloworld.users.UserApiClient;
+import com.pw.helloworld.users.UserApiClientImpl;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class Destination1Fragment extends Fragment {
         }
     };
 
-    private final UserApiClient.OnLoadListener onLoadListener = new UserApiClient.OnLoadListener() {
+    private final UserApiClientImpl.OnLoadListener onLoadListener = new UserApiClientImpl.OnLoadListener() {
 
         @Override
         public void onUsersLoaded(List<User> users) {
@@ -60,10 +61,17 @@ public class Destination1Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        userApiClient = new UserApiClientImpl();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_destination1, container, false);
         unbinder = ButterKnife.bind(this, view);
-        userApiClient = new UserApiClient.Builder().baseUrl(baseUrl).build();
+        userApiClient.init(baseUrl);
         return view;
     }
 
@@ -79,11 +87,6 @@ public class Destination1Fragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
         loadUsers();
     }
