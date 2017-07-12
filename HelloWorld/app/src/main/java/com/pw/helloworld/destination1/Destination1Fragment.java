@@ -20,7 +20,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -28,9 +27,6 @@ import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
 
 public class Destination1Fragment extends Fragment {
-
-    @BindString(R.string.base_url)
-    String baseUrl;
 
     @BindView(R.id.destination_1_swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
@@ -70,7 +66,6 @@ public class Destination1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_destination1, container, false);
         unbinder = ButterKnife.bind(this, view);
-        userApiClient.init(baseUrl);
         return view;
     }
 

@@ -4,38 +4,17 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 public class UserApiClientImpl implements UserApiClient {
 
-    private UserApi userApi;
+    private final UserApi userApi;
 
-    @Override
-    public void init(String baseUrl) {
-        if (baseUrl == null) {
-            throw new IllegalStateException("baseUrl is null");
-        }
-
-        final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        final OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor).build();
-
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(httpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        userApi = retrofit.create(UserApi.class);
+    public UserApiClientImpl(UserApi userApi) {
+        this.userApi = userApi;
     }
 
     @Override
