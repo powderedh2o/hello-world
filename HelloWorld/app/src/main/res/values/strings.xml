@@ -4,8 +4,4 @@
     <string name="navigation_destination_1_title">Dest 1</string>
     <string name="navigation_destination_2_title">Dest 2</string>
     <string name="navigation_destination_3_title">Dest 3</string>
-
-    <string name="start_your_activity">Start Activity</string>
-    <string name="your_activity_message">Initial activity message</string>
-    <string name="your_fragment_message">Initial fragment message</string>
 </resources>

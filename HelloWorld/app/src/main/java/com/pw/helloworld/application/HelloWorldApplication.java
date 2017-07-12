@@ -1,4 +1,4 @@
-package com.pw.helloworld;
+package com.pw.helloworld.application;
 
 import android.app.Activity;
 import android.app.Application;
@@ -25,7 +25,7 @@ public class HelloWorldApplication extends Application implements HasActivityInj
         super.onCreate();
 
         Timber.plant(new Timber.DebugTree());
-        DaggerYourApplicationComponent.create().inject(this);
+        DaggerApplicationComponent.create().inject(this);
     }
 
     @Override
