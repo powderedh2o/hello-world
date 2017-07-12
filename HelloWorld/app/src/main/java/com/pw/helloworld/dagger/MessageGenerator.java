@@ -1,20 +1,10 @@
 package com.pw.helloworld.dagger;
 
-import javax.inject.Inject;
+public interface MessageGenerator {
 
-class MessageGenerator {
+    String generateMessage(Source source);
 
-    private static final String MESSAGE = "Injected message: ";
-
-    @Inject
-    public MessageGenerator() {
-    }
-
-    public String generateMessage(Source source) {
-        return MESSAGE + source;
-    }
-
-    public enum Source {
+    enum Source {
 
         ACTIVITY("From Activity"),
         FRAGMENT("From Fragment");

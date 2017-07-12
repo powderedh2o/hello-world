@@ -43,7 +43,7 @@ public class YourFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        message.setText(messageGenerator.generateMessage(MessageGenerator.Source.FRAGMENT));
+        message.setText(messageGenerator.generateMessage(FancyMessageGenerator.Source.FRAGMENT));
     }
 
     @Override

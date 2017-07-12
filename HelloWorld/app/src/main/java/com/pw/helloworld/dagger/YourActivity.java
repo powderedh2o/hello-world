@@ -29,7 +29,7 @@ public class YourActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        message.setText(messageGenerator.generateMessage(MessageGenerator.Source.ACTIVITY));
+        message.setText(messageGenerator.generateMessage(FancyMessageGenerator.Source.ACTIVITY));
     }
 
     @Override
