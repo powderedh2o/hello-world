@@ -11,10 +11,13 @@ import com.pw.helloworld.users.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
     private final List<User> users;
 
+    @Inject
     public Destination1Adapter() {
         users = new ArrayList<>();
     }

@@ -37,7 +37,9 @@ public class Destination1Fragment extends Fragment {
     @Inject
     UserApiClient userApiClient;
 
-    private Destination1Adapter adapter;
+    @Inject
+    Destination1Adapter adapter;
+
     private Unbinder unbinder;
 
     private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -75,11 +77,8 @@ public class Destination1Fragment extends Fragment {
 
         swipeRefresh.setOnRefreshListener(onRefreshListener);
 
-        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        adapter = new Destination1Adapter();
-
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         loadUsers();
