@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.pw.helloworld.R;
 import com.pw.helloworld.users.User;
 import com.pw.helloworld.users.UserApiClient;
-import com.pw.helloworld.users.UserApiClientImpl;
 
 import java.util.List;
 
@@ -24,6 +23,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class Destination1Fragment extends Fragment {
@@ -41,6 +43,7 @@ public class Destination1Fragment extends Fragment {
     Destination1Adapter adapter;
 
     private Unbinder unbinder;
+    private Disposable disposable;
 
     private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
@@ -48,15 +51,6 @@ public class Destination1Fragment extends Fragment {
             Timber.d("Refreshing Users");
             swipeRefresh.setRefreshing(false);
             loadUsers();
-        }
-    };
-
-    private final UserApiClientImpl.OnLoadListener onLoadListener = new UserApiClientImpl.OnLoadListener() {
-
-        @Override
-        public void onUsersLoaded(List<User> users) {
-            Timber.d("Users loaded");
-            adapter.setUsers(users);
         }
     };
 
@@ -87,17 +81,36 @@ public class Destination1Fragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
+
         super.onAttach(context);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         unbinder.unbind();
     }
 
     private void loadUsers() {
         Timber.d("Loading users");
-        userApiClient.loadUsers(onLoadListener);
+        disposable = userApiClient.loadUsers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(users -> onUsersLoaded(users));
+    }
+
+    private void onUsersLoaded(List<User> users) {
+        Timber.d("Users loaded");
+        adapter.setUsers(users);
     }
 }

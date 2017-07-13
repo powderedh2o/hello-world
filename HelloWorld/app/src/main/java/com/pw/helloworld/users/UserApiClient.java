@@ -2,11 +2,9 @@ package com.pw.helloworld.users;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface UserApiClient {
 
-    void loadUsers(OnLoadListener listener);
-
-    interface OnLoadListener {
-        void onUsersLoaded(List<User> users);
-    }
+    Observable<List<User>> loadUsers();
 }

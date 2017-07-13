@@ -1,5 +1,6 @@
 package com.pw.helloworld.application;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.pw.helloworld.destination1.Destination1Fragment;
 import com.pw.helloworld.users.UserApi;
 import com.pw.helloworld.users.UserApiClient;
@@ -42,6 +43,7 @@ public abstract class ApplicationModule {
                 .baseUrl(baseUrl)
                 .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
