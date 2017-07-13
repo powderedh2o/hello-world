@@ -5,6 +5,8 @@ import com.pw.helloworld.destination1.Destination1Fragment;
 import com.pw.helloworld.rest.RestApi;
 import com.pw.helloworld.rest.RestApiClient;
 import com.pw.helloworld.rest.RestApiClientImpl;
+import com.pw.helloworld.rest.RestApiMediator;
+import com.pw.helloworld.rest.RestApiMediatorImpl;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -48,6 +50,7 @@ public abstract class ApplicationModule {
     }
 
     @Provides
+    @Singleton
     static RestApi provideRestApi(Retrofit retrofit) {
         return retrofit.create(RestApi.class);
     }
@@ -56,6 +59,12 @@ public abstract class ApplicationModule {
     @Singleton
     static RestApiClient provideRestApiClient(RestApi restApi) {
         return new RestApiClientImpl(restApi);
+    }
+
+    @Provides
+    @Singleton
+    static RestApiMediator provideRestApiMediator(RestApiClient restApiClient) {
+        return new RestApiMediatorImpl(restApiClient);
     }
 
     @ContributesAndroidInjector

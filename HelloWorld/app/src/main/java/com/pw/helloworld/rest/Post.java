@@ -1,6 +1,6 @@
 package com.pw.helloworld.rest;
 
-public class Post {
+class Post {
 
     private int userId;
 
