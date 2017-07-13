@@ -7,14 +7,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.pw.helloworld.R;
-import com.pw.helloworld.users.User;
-import com.pw.helloworld.users.UserApiClient;
+import com.pw.helloworld.rest.AugmentedUser;
+import com.pw.helloworld.rest.Post;
+import com.pw.helloworld.rest.RestApiClient;
+import com.pw.helloworld.rest.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -37,7 +42,7 @@ public class Destination1Fragment extends Fragment {
     RecyclerView recyclerView;
 
     @Inject
-    UserApiClient userApiClient;
+    RestApiClient restApiClient;
 
     @Inject
     Destination1Adapter adapter;
@@ -103,21 +108,52 @@ public class Destination1Fragment extends Fragment {
 
     private void loadUsers() {
         Timber.d("Loading users");
-        disposable = userApiClient.loadUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        users -> onUsersLoaded(users),
-                        throwable -> onUserLoadFailed(throwable)
-                );
+
+        Observable<List<User>> usersObservable =
+                restApiClient.loadUsers()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+
+        Observable<List<Post>> postsObservable =
+                restApiClient.loadPosts()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+
+        disposable = Observable.zip(
+                usersObservable,
+                postsObservable,
+                (users, posts) -> Pair.create(users, posts)
+        ).subscribe(
+                usersAndPosts -> onLoadSucceeded(usersAndPosts),
+                throwable -> onLoadFailed(throwable)
+        );
     }
 
-    private void onUsersLoaded(List<User> users) {
-        Timber.d("Users loaded");
-        adapter.setUsers(users);
+    private void onLoadSucceeded(Pair<List<User>, List<Post>> usersAndPosts) {
+        Timber.d("Successfully loaded data");
+        adapter.setUsers(getAugmentedUsers(usersAndPosts));
     }
 
-    private void onUserLoadFailed(Throwable t) {
-        Timber.d(t, "Failed to load users");
+    private List<AugmentedUser> getAugmentedUsers(Pair<List<User>, List<Post>> usersAndPosts) {
+        List<AugmentedUser> augmentedUsers = new ArrayList<>(usersAndPosts.first.size());
+
+        for (User user : usersAndPosts.first) {
+
+            int userId = user.getId();
+            int posts = 0;
+            for (Post post : usersAndPosts.second) {
+                if (userId == post.getUserId()) {
+                    posts++;
+                }
+            }
+
+            augmentedUsers.add(new AugmentedUser(user.getUsername(), user.getName(), posts));
+        }
+
+        return augmentedUsers;
+    }
+
+    private void onLoadFailed(Throwable t) {
+        Timber.d(t, "Failed to load data");
     }
 }

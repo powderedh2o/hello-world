@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pw.helloworld.R;
-import com.pw.helloworld.users.User;
+import com.pw.helloworld.rest.AugmentedUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 
 class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
-    private final List<User> users;
+    private final List<AugmentedUser> users;
 
     @Inject
     public Destination1Adapter() {
@@ -30,9 +30,10 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
 
     @Override
     public void onBindViewHolder(Destination1ViewHolder holder, int position) {
-        final User user = users.get(position);
+        final AugmentedUser user = users.get(position);
         holder.username.setText(user.getUsername());
         holder.name.setText(user.getName());
+        holder.posts.setText(String.valueOf(user.getPosts()));
     }
 
     @Override
@@ -40,7 +41,7 @@ class Destination1Adapter extends RecyclerView.Adapter<Destination1ViewHolder> {
         return users.size();
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<AugmentedUser> users) {
         this.users.clear();
         this.users.addAll(users);
         notifyDataSetChanged();

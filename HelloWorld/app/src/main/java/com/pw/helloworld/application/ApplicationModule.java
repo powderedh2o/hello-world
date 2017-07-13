@@ -2,9 +2,9 @@ package com.pw.helloworld.application;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.pw.helloworld.destination1.Destination1Fragment;
-import com.pw.helloworld.users.UserApi;
-import com.pw.helloworld.users.UserApiClient;
-import com.pw.helloworld.users.UserApiClientImpl;
+import com.pw.helloworld.rest.RestApi;
+import com.pw.helloworld.rest.RestApiClient;
+import com.pw.helloworld.rest.RestApiClientImpl;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -48,14 +48,14 @@ public abstract class ApplicationModule {
     }
 
     @Provides
-    static UserApi provideUserApi(Retrofit retrofit) {
-        return retrofit.create(UserApi.class);
+    static RestApi provideRestApi(Retrofit retrofit) {
+        return retrofit.create(RestApi.class);
     }
 
     @Provides
     @Singleton
-    static UserApiClient provideUserApiClient(UserApi userApi) {
-        return new UserApiClientImpl(userApi);
+    static RestApiClient provideRestApiClient(RestApi restApi) {
+        return new RestApiClientImpl(restApi);
     }
 
     @ContributesAndroidInjector

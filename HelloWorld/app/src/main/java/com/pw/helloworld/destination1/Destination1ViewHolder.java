@@ -17,6 +17,9 @@ public class Destination1ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.destination_1_item_name)
     TextView name;
 
+    @BindView(R.id.destination_1_item_posts)
+    TextView posts;
+
     public Destination1ViewHolder(View itemView) {
         super(itemView);
 
