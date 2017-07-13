@@ -1,9 +1,10 @@
 package com.pw.helloworld.destination1;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import com.pw.helloworld.R;
 import com.pw.helloworld.rest.AugmentedUser;
 import com.pw.helloworld.rest.RestApiMediator;
+import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle;
+import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.util.List;
 
@@ -25,7 +28,9 @@ import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
 
-public class Destination1Fragment extends Fragment {
+public class Destination1Fragment extends LifecycleFragment {
+
+    private final LifecycleProvider<Lifecycle.Event> lifecycleProvider = AndroidLifecycle.createLifecycleProvider(this);
 
     @BindView(R.id.destination_1_swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
@@ -70,8 +75,6 @@ public class Destination1Fragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-
-        loadUsers();
     }
 
     @Override
@@ -82,10 +85,10 @@ public class Destination1Fragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onResume() {
+        super.onResume();
 
-        restApiMediator.dispose();
+        loadUsers();
     }
 
     @Override
@@ -99,7 +102,8 @@ public class Destination1Fragment extends Fragment {
         Timber.d("Loading users");
         restApiMediator.loadUsers(
                 this::onLoadSucceeded,
-                this::onLoadFailed);
+                this::onLoadFailed,
+                lifecycleProvider);
     }
 
     private void onLoadSucceeded(List<AugmentedUser> augmentedUsers) {

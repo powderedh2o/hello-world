@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -41,11 +42,12 @@ public abstract class ApplicationModule {
     @Provides
     @Singleton
     static Retrofit provideRetrofit(OkHttpClient httpClient, @Named("baseUrl") String baseUrl) {
+        final RxJava2CallAdapterFactory rxAdapter = RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io());
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(rxAdapter)
                 .build();
     }
 
