@@ -106,11 +106,18 @@ public class Destination1Fragment extends Fragment {
         disposable = userApiClient.loadUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(users -> onUsersLoaded(users));
+                .subscribe(
+                        users -> onUsersLoaded(users),
+                        throwable -> onUserLoadFailed(throwable)
+                );
     }
 
     private void onUsersLoaded(List<User> users) {
         Timber.d("Users loaded");
         adapter.setUsers(users);
+    }
+
+    private void onUserLoadFailed(Throwable t) {
+        Timber.d(t, "Failed to load users");
     }
 }
