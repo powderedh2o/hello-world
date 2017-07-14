@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.pw.restlibrary.test", appContext.getPackageName());
+        assertEquals("com.pw.restclient.test", appContext.getPackageName());
     }
 }
