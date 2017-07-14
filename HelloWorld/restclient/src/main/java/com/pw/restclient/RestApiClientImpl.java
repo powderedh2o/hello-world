@@ -1,8 +1,4 @@
-package com.pw.helloworld.rest;
-
-import com.pw.restclient.Post;
-import com.pw.restclient.RestApi;
-import com.pw.restclient.User;
+package com.pw.restclient;
 
 import java.util.List;
 

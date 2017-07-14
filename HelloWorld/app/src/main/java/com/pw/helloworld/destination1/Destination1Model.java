@@ -3,7 +3,7 @@ package com.pw.helloworld.destination1;
 import android.arch.lifecycle.Lifecycle;
 
 import com.pw.restclient.AugmentedUser;
-import com.pw.helloworld.rest.RestApiMediator;
+import com.pw.restclient.RestApiMediator;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.util.List;

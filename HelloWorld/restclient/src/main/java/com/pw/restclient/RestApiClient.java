@@ -1,4 +1,4 @@
-package com.pw.helloworld.rest;
+package com.pw.restclient;
 
 import com.pw.restclient.Post;
 import com.pw.restclient.User;

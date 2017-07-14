@@ -5,10 +5,10 @@ import com.pw.helloworld.destination1.Destination1Contract;
 import com.pw.helloworld.destination1.Destination1Fragment;
 import com.pw.helloworld.destination1.Destination1Model;
 import com.pw.restclient.RestApi;
-import com.pw.helloworld.rest.RestApiClient;
-import com.pw.helloworld.rest.RestApiClientImpl;
-import com.pw.helloworld.rest.RestApiMediator;
-import com.pw.helloworld.rest.RestApiMediatorImpl;
+import com.pw.restclient.RestApiClient;
+import com.pw.restclient.RestApiClientImpl;
+import com.pw.restclient.RestApiMediator;
+import com.pw.restclient.RestApiMediatorImpl;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
