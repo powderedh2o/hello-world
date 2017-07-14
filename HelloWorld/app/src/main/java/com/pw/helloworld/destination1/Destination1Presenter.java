@@ -5,8 +5,6 @@ import android.arch.lifecycle.Lifecycle;
 import com.pw.restclient.AugmentedUser;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 import timber.log.Timber;
@@ -17,7 +15,7 @@ public class Destination1Presenter implements Destination1Contract.Presenter {
     private final Destination1Contract.View view;
     private final LifecycleProvider<Lifecycle.Event> lifecycleProvider;
 
-    public Destination1Presenter(@NotNull Destination1Contract.Model model, @NotNull Destination1Contract.View view, @NotNull LifecycleProvider<Lifecycle.Event> lifecycleProvider) {
+    public Destination1Presenter(Destination1Contract.Model model, Destination1Contract.View view, LifecycleProvider<Lifecycle.Event> lifecycleProvider) {
         this.model = model;
         this.view = view;
         this.lifecycleProvider = lifecycleProvider;

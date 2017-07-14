@@ -1,6 +1,5 @@
 package com.pw.helloworld.destination1;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +13,7 @@ import android.view.ViewGroup;
 import com.pw.helloworld.BaseFragment;
 import com.pw.helloworld.R;
 import com.pw.restclient.AugmentedUser;
+import com.pw.restclient.RestClientModule;
 
 import java.util.List;
 
@@ -30,12 +30,13 @@ public class Destination1Fragment extends BaseFragment implements Destination1Co
     RecyclerView recyclerView;
 
     @Inject
-    Destination1Model model;
+    Destination1Contract.Model model;
+
+    @Inject
+    Destination1Contract.Presenter presenter;
 
     @Inject
     Destination1Adapter adapter;
-
-    private Destination1Contract.Presenter presenter;
 
     public static Destination1Fragment newInstance() {
         return new Destination1Fragment();
@@ -44,6 +45,18 @@ public class Destination1Fragment extends BaseFragment implements Destination1Co
     @Override
     public void setPresenter(@NonNull Destination1Contract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        DaggerDestination1Component
+                .builder()
+                .restClientModule(new RestClientModule(getContext().getApplicationContext()))
+                .destination1Module(new Destination1Module(this, getLifecycleProvider()))
+                .build()
+                .inject(this);
     }
 
     @Override
@@ -59,13 +72,6 @@ public class Destination1Fragment extends BaseFragment implements Destination1Co
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        new Destination1Presenter(model, this, getLifecycleProvider());
     }
 
     @Override

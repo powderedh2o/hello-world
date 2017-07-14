@@ -1,6 +1,6 @@
 package com.pw.restclient;
 
-public class Post {
+class Post {
 
     private int userId;
 
