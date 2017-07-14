@@ -28,12 +28,12 @@ public abstract class BaseFragment extends LifecycleFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflateView(inflater, container, savedInstanceState);
+        View view = inflateView(inflater, container);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
-    protected abstract View inflateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState);
+    protected abstract View inflateView(LayoutInflater inflater, ViewGroup container);
 
     @Override
     public void onAttach(Context context) {

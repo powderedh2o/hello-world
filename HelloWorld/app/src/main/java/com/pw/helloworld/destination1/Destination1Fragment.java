@@ -47,7 +47,7 @@ public class Destination1Fragment extends BaseFragment implements Destination1Co
     }
 
     @Override
-    protected View inflateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected View inflateView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_destination1, container, false);
     }
 

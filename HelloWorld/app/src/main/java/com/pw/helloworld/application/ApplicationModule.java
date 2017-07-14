@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.pw.helloworld.destination1.Destination1Contract;
 import com.pw.helloworld.destination1.Destination1Fragment;
 import com.pw.helloworld.destination1.Destination1Model;
-import com.pw.helloworld.rest.RestApi;
+import com.pw.restclient.RestApi;
 import com.pw.helloworld.rest.RestApiClient;
 import com.pw.helloworld.rest.RestApiClientImpl;
 import com.pw.helloworld.rest.RestApiMediator;
