@@ -1,7 +1,9 @@
 package com.pw.helloworld.application;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.pw.helloworld.destination1.Destination1Contract;
 import com.pw.helloworld.destination1.Destination1Fragment;
+import com.pw.helloworld.destination1.Destination1Model;
 import com.pw.helloworld.rest.RestApi;
 import com.pw.helloworld.rest.RestApiClient;
 import com.pw.helloworld.rest.RestApiClientImpl;
@@ -67,6 +69,11 @@ public abstract class ApplicationModule {
     @Singleton
     static RestApiMediator provideRestApiMediator(RestApiClient restApiClient) {
         return new RestApiMediatorImpl(restApiClient);
+    }
+
+    @Provides
+    static Destination1Contract.Model provideDestination1Model(RestApiMediator restApiMediator) {
+        return new Destination1Model(restApiMediator);
     }
 
     @ContributesAndroidInjector
