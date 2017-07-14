@@ -2,7 +2,7 @@ package com.pw.helloworld.destination1;
 
 import android.arch.lifecycle.Lifecycle;
 
-import com.pw.helloworld.rest.AugmentedUser;
+import com.pw.restclient.AugmentedUser;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import org.jetbrains.annotations.NotNull;

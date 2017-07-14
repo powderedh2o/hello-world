@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pw.helloworld.R;
-import com.pw.helloworld.rest.AugmentedUser;
+import com.pw.restclient.AugmentedUser;
 
 import java.util.ArrayList;
 import java.util.List;

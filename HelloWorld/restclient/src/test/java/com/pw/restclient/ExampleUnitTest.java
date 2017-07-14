@@ -1,4 +1,4 @@
-package com.pw.restlibrary;
+package com.pw.restclient;
 
 import org.junit.Test;
 

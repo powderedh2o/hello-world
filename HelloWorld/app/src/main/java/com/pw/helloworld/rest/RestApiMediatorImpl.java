@@ -2,6 +2,9 @@ package com.pw.helloworld.rest;
 
 import android.arch.lifecycle.Lifecycle;
 
+import com.pw.restclient.AugmentedUser;
+import com.pw.restclient.Post;
+import com.pw.restclient.User;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.util.ArrayList;

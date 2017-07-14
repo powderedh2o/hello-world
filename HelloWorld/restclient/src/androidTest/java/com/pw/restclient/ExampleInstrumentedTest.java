@@ -1,4 +1,4 @@
-package com.pw.restlibrary;
+package com.pw.restclient;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,5 +1,8 @@
 package com.pw.helloworld.rest;
 
+import com.pw.restclient.Post;
+import com.pw.restclient.User;
+
 import java.util.List;
 
 import io.reactivex.Observable;

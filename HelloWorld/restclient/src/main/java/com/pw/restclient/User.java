@@ -1,6 +1,6 @@
-package com.pw.helloworld.rest;
+package com.pw.restclient;
 
-class User {
+public class User {
 
     private int id;
     private String username;

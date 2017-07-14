@@ -1,1 +1,1 @@
-include ':app', ':restlibrary'
+include ':app', ':restclient'

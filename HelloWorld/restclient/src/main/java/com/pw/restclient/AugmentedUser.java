@@ -1,4 +1,4 @@
-package com.pw.helloworld.rest;
+package com.pw.restclient;
 
 public class AugmentedUser {
 
